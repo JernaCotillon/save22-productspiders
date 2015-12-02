@@ -3,7 +3,7 @@ from sample.items import SampleItem
 from scrapy.selector import Selector
 
 class AllForYouu(scrapy.Spider):
-    name = "sample"
+    name = "sam"
     allowed_domains = ["allforyou.sg"]
     start_urls = [
         "https://allforyou.sg/",
@@ -25,8 +25,10 @@ class AllForYouu(scrapy.Spider):
     def parse_dir_contents(self, response):
         items = list()
 
-        for sel in response.xpath("//div[@class='prod_data']"):
+        for sel in response.xpath('//div[@class="prod-data"]'):
+            print "PASOOOOOOOOOOOOOK"
             item = SampleItem()
+            
             item['url'] = response.url or None
             item['title'] = sel.xpath('@data-name').extract()
             item['description'] = sel.xpath('@data-desc').extract()
@@ -36,4 +38,4 @@ class AllForYouu(scrapy.Spider):
             item['oldprice'] = sel.xpath('@data-oldprice').extract()
             item['outofstock'] = sel.xpath('@data-outofstock').extract()
             items.append(item)
-            yield items
+            yield item
