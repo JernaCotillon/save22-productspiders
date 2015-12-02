@@ -1,9 +1,8 @@
 import scrapy
 from save22_productspiders.items import SampleItem
-from scrapy.selector import Selector
 
 class AllForYouu(scrapy.Spider):
-    name = "allforyou"
+    name = "all"
     allowed_domains = ["allforyou.sg"]
     start_urls = [
         "https://allforyou.sg/",
@@ -26,7 +25,6 @@ class AllForYouu(scrapy.Spider):
         items = list()
 
         for sel in response.xpath('//div[@class="prod-data"]'):
-            print "PASOOOOOOOOOOOOOK"
             item = SampleItem()
             
             item['url'] = response.url or None
