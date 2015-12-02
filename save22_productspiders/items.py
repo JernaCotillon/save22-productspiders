@@ -7,14 +7,20 @@
 
 import scrapy
 
-
-class Save22ProductspidersItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+class SampleItem(scrapy.Item):
     url = scrapy.Field()
     title = scrapy.Field()
     description = scrapy.Field()
-    retailer = scrapy.Field()
+    img_urls = scrapy.Field()
+    sel_qty = scrapy.Field()
+    price = scrapy.Field()
+    oldprice = scrapy.Field()
+    outofstock = scrapy.Field()
+class ExpansysItem(scrapy.Item):
+    url = scrapy.Field()
+    title = scrapy.Field()
+    description = scrapy.Field()
+    retailer_sku_code = scrapy.Field()
     model = scrapy.Field()
     mpn = scrapy.Field()
     sku = scrapy.Field()
@@ -27,7 +33,9 @@ class Save22ProductspidersItem(scrapy.Item):
     promo_qty = scrapy.Field()
     promo_data = scrapy.Field()
     promo_expiry = scrapy.Field()
-    current_price = scrapy.Field()\
+    current_price = scrapy.Field()
     brand = scrapy.Field()
-    primary_image_url = scrapy.Field()
     pass
+    
+
+
