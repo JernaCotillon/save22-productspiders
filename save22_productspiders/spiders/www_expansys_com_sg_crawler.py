@@ -3,7 +3,7 @@ from datetime import datetime
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
-from save22_productspiders.items import Save22ProductspidersItem
+from save22_productspiders.items import ExpansysItem
 
 
 class WwwExpansysComSgCrawler(CrawlSpider):

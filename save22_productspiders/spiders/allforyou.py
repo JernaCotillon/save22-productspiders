@@ -11,7 +11,7 @@ class AllForYouu(scrapy.Spider):
     def parse(self, response):
         for href in response.css("div.span2.categorybox-span > div.categorybox.thumbnail.text-center > div.thumb > a::attr('href')"):   
           url = response.urljoin(href.extract())
-          print "category --> " + url
+          print "Category link --> " + url
           request = scrapy.Request(url, callback=self.parse_2)
           yield request
 
@@ -26,7 +26,6 @@ class AllForYouu(scrapy.Spider):
 
         for sel in response.xpath('//div[@class="prod-data"]'):
             item = SampleItem()
-            
             item['url'] = response.url or None
             item['title'] = sel.xpath('@data-name').extract()
             item['description'] = sel.xpath('@data-desc').extract()
