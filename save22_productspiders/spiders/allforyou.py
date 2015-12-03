@@ -15,11 +15,12 @@ class AllForYouu(scrapy.Spider):
           request = scrapy.Request(url, callback=self.parse_2)
           yield request
 
+
     def parse_2(self, response):
         for href in response.css("div.FeaturedHeader > h2 > a::attr('href')"):
           url = response.urljoin(href.extract())    
           request = scrapy.Request(url, callback=self.parse_dir_contents)
-          yield request
+          yield request      
 
     def parse_dir_contents(self, response):
         items = list()
@@ -36,3 +37,9 @@ class AllForYouu(scrapy.Spider):
             item['outofstock'] = sel.xpath('@data-outofstock').extract()
             items.append(item)
             yield item
+
+        next_page = response.css("div.pager > span.current-page > a.individual-page > a.next-page > a::attr('href')")
+        if next_page:
+              url = response.urljoin(next_page[0].extract())
+              yield scrapy.Request(url, callback=self.parse_dir_contents)
+        
