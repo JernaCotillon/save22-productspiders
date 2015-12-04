@@ -39,9 +39,14 @@ class Expansys(scrapy.Spider):
             item['brand'] = sel.xpath('//div[@id="prod_core"]/ul/li[4]/a/text()').extract()
             item['currency'] = sel.xpath('//p[@id="price"]/meta/@content').extract()
             item['img_urls'] = sel.xpath('//div[@id="prod_left"]/div[2]/a/img/@src').extract()
-            # item['price'] = sel.xpath('@data-price').extract()
-            # item['oldprice'] = sel.xpath('@data-oldprice').extract()
-            # item['outofstock'] = sel.xpath('@data-outofstock').extract()
+            item['categories'] = sel.xpath('//li[@id="n_audio"]/div/div[1]/ul/li/a/text()').extract()
+            item['availability'] = sel.xpath('//li[@id="stock"]/text()').extract()
+            item['rating'] = sel.xpath('//div[@id="review_avg"]/span[1]/text()').extract()
+            features1 = response.xpath('//div[@id="description"]/div[1]/span/text()[1]').extract() 
+            features2 = response.xpath('//div[@id="description"]/div[1]/span/text()[2]').extract() 
+            features3= response.xpath('//div[@id="description"]/div[1]/span/text()[3]').extract() 
+            allFeatures = features1 + features2 + features3
+            item['features'] = allFeatures
+            item['attributes'] = response.xpath('//ul[@id="p_details"]/li/strong/text()').extract()
             items.append(item)
             yield item
-
