@@ -2,6 +2,7 @@ from datetime import datetime
 import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors.lxmlhtml import LxmlLinkExtractor
+from scrapy.linkextractors import LinkExtractor
 from save22_productspiders.items import ExpansysItem
 
 
@@ -13,6 +14,7 @@ class WwwExpansysComSgCrawler(CrawlSpider):
       ]
   
   rules = [
+    Rule(LinkExtractor(allow='page=\d+#listing'),follow=True,),
     Rule(LxmlLinkExtractor(allow=(r'.+/\S+\d+/',),deny = (r'.+/.filter',)),
         callback = 'parse_item',
         follow=True,)
